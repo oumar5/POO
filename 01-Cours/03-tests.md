@@ -28,6 +28,9 @@ flowchart TD
 
 💡 **L'idée :** un programme qui « a l'air de marcher » ne prouve rien ; seuls des tests **systématiques** donnent confiance.
 
+> 🌍 **Dans la vraie vie :** au **contrôle technique**, on vérifie chaque élément séparément (freins, phares, pneus) avec une liste fixe de points : c'est le test **unitaire**. Après avoir changé les pneus, le garagiste revérifie **aussi** les freins : c'est la **non-régression**.
+> → en Java : une méthode de test par comportement, et on relance **tous** les tests après chaque modification.
+
 > 📌 **Règle** : un code non testé n'a aucune valeur.
 > 📌 **Corollaire** : **tout** code doit être testé.
 
@@ -43,6 +46,9 @@ Deux types de tests à connaître :
 ## 2. Premier test JUnit : la classe `Box`
 
 💡 **L'idée :** pour une classe `Box`, on écrit une classe `BoxTest` dont chaque méthode vérifie un comportement à l'aide d'**assertions**.
+
+> 🌍 **Dans la vraie vie :** un cuisinier **goûte** chaque sauce avant de servir, en se demandant « est-ce bien ce que j'attendais ? ». La sauce (le code) et la dégustation (le test) sont deux choses séparées.
+> → en Java : `Box` = le plat, `BoxTest` = la dégustation ; chaque `assertXxx` = « j'attendais ça ».
 
 Mise en œuvre : **framework JUnit** (version 5, « Jupiter »), qui s'appuie sur des **assertions** (voir documents de TP + portail, onglet « Documents »).
 
@@ -145,6 +151,10 @@ java -jar junit-console.jar -classpath test:classes -scan-classpath
 
 💡 **L'idée :** JUnit affiche un **bilan** ; en cas d'échec, il indique **quel test**, **quelle valeur attendue** et **quelle valeur obtenue**.
 
+> 🌍 **Dans la vraie vie :** le procès-verbal du contrôle technique indique « freinage avant : **attendu** ≥ 50 %, **mesuré** 30 % » : on sait **quoi** réparer, sans tout démonter.
+> → en Java : `expected: <20> but was: <10>` + le nom du test + la ligne.
+> ⚠️ Limite : si l'appareil de mesure est mal réglé, c'est le **test** qui est faux, pas la voiture (voir ci-dessous).
+
 **Tests passés avec succès :**
 
 ```text
@@ -180,6 +190,9 @@ Failures (1):
 ## 5. Anatomie d'une méthode de test
 
 💡 **L'idée :** une méthode de test = mettre en place une situation, appeler la méthode testée, puis **vérifier** le résultat par des assertions.
+
+> 🌍 **Dans la vraie vie :** un **crash-test** : on installe la voiture et le mannequin (situation initiale), on vérifie que la ceinture est bouclée (précondition), on lance la voiture contre le mur (appel), puis on mesure les dégâts (postconditions).
+> → en Java : créer les objets, `assertFalse(...)` avant, appeler **la** méthode, `assertXxx(...)` après.
 
 **Règles de forme :**
 - préfixée de l'annotation **`@Test`** ;
@@ -233,9 +246,15 @@ assertEquals(10, robbie.getCarriedBox().getWeight()); // même VALEUR (int)
 - `assertSame` → identité des **références** (comme `==` sur des objets).
 - `assertEquals` → égalité des **valeurs** (`equals` pour les objets).
 
+> 🌍 **Dans la vraie vie :** au vestiaire, on te rend « **un** manteau noir taille M » (même valeur : `assertEquals`) ou « **ton** manteau, celui du ticket n° 12 » (même objet : `assertSame`). Pour être sûr de repartir avec le tien, seul le 2ᵉ test compte.
+> → en Java : le robot doit porter **la** caisse `b`, pas une caisse de même poids → `assertSame`.
+
 ## 7. Exemple complet : le `Robot` qui porte des caisses
 
 💡 **L'idée :** on part d'un **cahier des charges** en français et on le traduit en **un test par comportement attendu**.
+
+> 🌍 **Dans la vraie vie :** le règlement d'un hôtel dit « une chambre déjà louée ne peut pas être relouée » : chaque phrase de ce type devient une **vérification** précise que l'on peut cocher.
+> → en Java : une phrase du cahier des charges = une méthode `@Test` au nom explicite (c'est exactement l'esprit des tests fournis au TP4 hôtel).
 
 > **Cahier des charges** — Un robot peut porter une caisse d'un poids maximal défini à la construction du robot. Initialement un robot ne porte pas de caisse. S'il porte déjà une caisse il ne peut en prendre une autre.
 
@@ -355,6 +374,9 @@ public class Robot {
 ## 8. Méthodologie : les tests AVANT le code
 
 💡 **L'idée :** on travaille **une méthode à la fois**, et on écrit ses tests **avant** son code.
+
+> 🌍 **Dans la vraie vie :** un enseignant rédige le **barème** avant de corriger les copies : il sait à l'avance ce qu'il attend, et n'est pas influencé par ce qu'il lit.
+> → en Java : javadoc + tests d'abord (le barème), code ensuite (la copie) ; au TP4, l'objectif est « 0 test en échec ».
 
 **Les 6 étapes du cours :**
 1. définir la **signature** de la méthode ;
@@ -491,6 +513,7 @@ java -jar junit-console.jar -classpath test:classes -scan-classpath
 
 ## 🔗 Pour pratiquer
 
+- 🏋️ [Exercices d'entraînement (avec corrigé)](../06-Exercices/03-tests/enonce.md)
 - [TP4 — hôtel](../03-TP/TP4-hotel/ENONCE.md)
 - [TD3 — tournois](../02-TD/TD3-tournois/enonce.md)
 - [Mémento des commandes (javac, JUnit, javadoc)](../05-Fiches/memento-commandes.md)

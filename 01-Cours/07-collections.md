@@ -83,6 +83,9 @@ classDiagram
 
 💡 **L'idée :** une liste est une collection **ordonnée** : chaque élément a une **position** (index).
 
+> 🌍 **Dans la vraie vie :** une playlist : chaque morceau a un numéro de piste, on peut lancer directement la piste 3, insérer un titre en tête, et le même titre peut apparaître deux fois.
+> → en Java : `List<E>` = ordre + positions (`get(i)`, `add(i, e)`) + doublons autorisés.
+
 ```java
 List<String> noms = new ArrayList<String>();
 noms.add("Frodo"); noms.add("Sam");   // positions 0 et 1
@@ -97,6 +100,9 @@ noms.remove(0);             // supprime "Bilbo"
 ⚠️ `get` et `remove(int)` lèvent `IndexOutOfBoundsException` si `index < 0 || index >= size()`.
 
 ### Deux implémentations
+
+> 🌍 **Dans la vraie vie :** `ArrayList` = une rangée de casiers numérotés : on ouvre le n° 7 directement, mais ajouter un casier au début oblige à tout décaler. `LinkedList` = un train de wagons accrochés : ajouter un wagon en tête est immédiat, mais pour atteindre le 30e il faut traverser les 29 premiers.
+> → en Java : d'où les écarts de temps mesurés ci-dessous entre `get(i)` et l'insertion en tête.
 
 ```mermaid
 flowchart LR
@@ -124,6 +130,9 @@ Mesures du cours (40 000 opérations) : `get(k)` → LinkedList 606 ms / ArrayLi
 ## 3. Les ensembles : `Set<E>`
 
 💡 **L'idée :** un ensemble est une collection **sans répétition de valeurs** : ajouter deux fois « la même » valeur ne la stocke qu'une fois.
+
+> 🌍 **Dans la vraie vie :** la liste des invités d'un anniversaire : inscrire deux fois « Léa » ne fait pas venir deux Léa, et la seule question utile est « est-elle invitée ? ».
+> → en Java : `Set<E>` refuse les doublons (`add` renvoie `false`) et `HashSet` répond très vite à `contains` ; un album de timbres rangé dans l'ordre serait plutôt un `TreeSet`.
 
 ```java
 Set<String> s = new HashSet<String>();
@@ -172,6 +181,9 @@ List<Item> aList = new LinkedList<Item>();
 ## 5. Les itérateurs
 
 💡 **L'idée :** pour parcourir les éléments d'une collection, on demande à la collection un **itérateur**, un objet qui « avance » d'élément en élément.
+
+> 🌍 **Dans la vraie vie :** au supermarché, ton doigt suit la liste de courses : « reste-t-il une ligne ? » puis « article suivant », sans jamais compter les numéros de ligne.
+> → en Java : le doigt, c'est l'`Iterator` (`hasNext()` / `next()`), fourni par la collection elle-même via `iterator()`.
 
 ### 5.1 L'interface `java.util.Iterator<E>`
 
@@ -241,6 +253,9 @@ for (int i = 0; i < l.size(); i++) { ... l.get(i) ... }   // ❌ À NE JAMAIS FA
 
 💡 **L'idée :** si la collection est modifiée **après** la création de l'itérateur (autrement que par le `remove`/`add` de l'itérateur lui-même), l'itérateur lance une **`ConcurrentModificationException`**.
 
+> 🌍 **Dans la vraie vie :** pendant que ton doigt suit la liste de courses, quelqu'un y ajoute une ligne en cachette : tu risques de sauter ou de relire un article. Mieux vaut s'arrêter net et le signaler.
+> → en Java : l'itérateur s'arrête net en levant `ConcurrentModificationException` ; pour modifier pendant le parcours, passer par `it.remove()`.
+
 ```java
 List<Item> l = ...;
 for (int i = 0; i < 5; i++) { l.add(new Item(...)); }
@@ -255,6 +270,9 @@ some = it_l.next();        // ConcurrentModificationException levée
 ## 6. Les tables : `Map<K,V>`
 
 💡 **L'idée :** une `Map` associe des **clés** (uniques) à des **valeurs**, comme un dictionnaire : auteur ⟶ livre.
+
+> 🌍 **Dans la vraie vie :** le vestiaire d'une salle de concert : tu déposes ton manteau, on te donne le ticket n° 42 ; à la sortie, le ticket suffit à retrouver le manteau. Un numéro = un seul crochet : accrocher autre chose au n° 42 remplace ce qui y était.
+> → en Java : ticket = clé `K` (unique), manteau = valeur `V` ; `put(42, manteau)`, `get(42)`, et un second `put` sur la même clé **remplace**.
 
 - Aussi appelées « listes associatives », dictionnaires, index… : couples **(clé, valeur)**, **clés uniques**.
 - ⚠️ Les `Map` **ne sont pas des collections** ⇒ **pas d'itérateur** direct.
@@ -321,6 +339,9 @@ public void displayMap() {
 ## 7. Attention !!! `equals` et `hashCode`
 
 💡 **L'idée :** une `HashMap` (ou un `HashSet`) reconnaît deux clés comme « identiques » seulement si elles ont le **même `hashCode()`** **ET** sont **égales selon `equals`**.
+
+> 🌍 **Dans la vraie vie :** un secrétariat range les dossiers dans des casiers par première lettre du nom : pour « Martin », on ouvre directement le casier M, puis on compare les dossiers un par un. Si deux dossiers « Martin » identiques atterrissaient dans des casiers différents, on ne verrait jamais le doublon.
+> → en Java : le casier = `hashCode()`, la comparaison dans le casier = `equals` ; deux objets égaux **doivent** avoir le même `hashCode()`.
 
 ### 7.1 Ça marche avec `Integer`…
 
@@ -395,6 +416,9 @@ flowchart LR
 ## 8. Difficultés liées au typage générique
 
 💡 **L'idée :** `ArrayList<String>` est un sous-type de `Collection<String>`, mais **`Collection<String>` n'est PAS un sous-type de `Collection<Object>`**.
+
+> 🌍 **Dans la vraie vie :** une corbeille à papier n'est pas une poubelle « tout recyclable » : si on la faisait passer pour telle, quelqu'un pourrait y jeter une pile ! On peut en revanche **lire** son contenu comme « des déchets recyclables ».
+> → en Java : `List<Paper>` n'est pas une `Collection<Recyclable>` (sinon `add(new Battery())` serait permis), mais elle convient pour une `Collection<? extends Recyclable>` (lecture seule).
 
 ```mermaid
 flowchart LR
@@ -585,6 +609,7 @@ for (Map.Entry<String,Book> entry : table.entrySet()) {
 
 ## 🔗 Pour pratiquer
 
+- 🏋️ [Exercices d'entraînement (avec corrigé)](../06-Exercices/07-collections/enonce.md)
 - [TP Othello](../03-TP/TP-othello/ENONCE.md)
 
 ---

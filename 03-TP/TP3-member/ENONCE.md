@@ -3,6 +3,8 @@
 > 🎯 **Objectifs** : définir un **type énuméré** avec constantes et méthode `static`, écrire `equals()`, utiliser les **arguments** de `main`, rendre un TP sur **GitLab**.
 > 📚 Cours : [02 — static et enum](../../01-Cours/02-static-et-enum.md) · [01 — Classes et objets](../../01-Cours/01-classes-et-objets.md) · 🛠️ [Memento](../../05-Fiches/memento-commandes.md)
 
+> ✅ [Corrigé](./CORRIGE.md) — essaie d'abord seul·e !
+
 ## 🗺️ Le sujet en deux schémas
 
 ```mermaid

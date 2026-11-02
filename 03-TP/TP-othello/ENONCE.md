@@ -3,6 +3,7 @@
 > 🎯 **Objectif** : transformer ton analyse du TD en un **programme complet** : documentation + tests + code + **jar exécutable**.
 > 📝 Préparation : le [TD Othello](../../02-TD/TD-othello/enonce.md) doit être fait.
 > 📚 Cours : [04 — Exceptions](../../01-Cours/04-exceptions.md) · [05 — Polymorphisme et interfaces](../../01-Cours/05-polymorphisme-et-interfaces.md) · [07 — Collections](../../01-Cours/07-collections.md) · 🛠️ [Memento](../../05-Fiches/memento-commandes.md)
+> ✅ [Corrigé](./CORRIGE.md) — essaie d'abord seul·e !
 
 ## ✅ Travail demandé
 

@@ -121,6 +121,9 @@ Phases de la compilation :
 
 💡 **L'idée :** les types de base (`int`, `float`…) ne suffisent pas : un âge et une température sont tous deux des `int`, mais on ne doit pas pouvoir les mélanger.
 
+> 🌍 **Dans la vraie vie :** « 42 » tout seul ne veut rien dire : 42 ans, 42 °C ou 42 € ? C'est l'**unité** qui donne le sens et les opérations permises : on peut demander si 42 ans est « majeur », pas si 42 € l'est.
+> → en Java : créer ses types (`Person`, `Thermometer`, `Article`) pour que le compilateur refuse de mélanger un âge et une température.
+
 ```java
 int temperature = 42;   // température prévue à Oslo demain
 int age = 42;           // âge du neveu de la voisine
@@ -149,6 +152,9 @@ Bilan :
 ## 5. Objet, classe, attributs, méthodes
 
 💡 **L'idée :** un **objet** regroupe des **données** (son état) et sait exécuter des **opérations** (son comportement). Sa **classe** est le modèle qui décrit les deux.
+
+> 🌍 **Dans la vraie vie :** ton téléphone a un **état** (batterie à 80 %, volume, mode avion) et un **comportement** (appeler, photographier, se recharger). Appeler vide la batterie (le comportement agit sur l'état) ; à 0 %, plus d'appel possible (l'état influence le comportement).
+> → en Java : état = **attributs**, comportement = **méthodes**, réunis dans le même objet.
 
 > 📌 En programmation objet, on **définit des types d'objets** (les classes), puis on **crée des objets** et on les **fait interagir**.
 
@@ -237,6 +243,9 @@ flowchart LR
 
 💡 **L'idée :** on n'« appelle » pas une fonction toute seule : on **demande à un objet** d'exécuter une de ses méthodes. C'est l'**envoi de message**.
 
+> 🌍 **Dans la vraie vie :** au restaurant, tu demandes « l'addition, s'il vous plaît » **au serveur** : tu ne vas pas en cuisine la calculer toi-même. Lui demander de réparer ta voiture n'aurait aucun sens : il ne répond qu'aux demandes de son métier.
+> → en Java : `alice.isAdult()` = demander à l'objet `alice` ; `t1.isAdult()` est refusé car un `Thermometer` ne connaît pas ce message.
+
 Notation pointée : `reference.message(arguments)`
 
 ```java
@@ -305,6 +314,9 @@ flowchart TD
 
 ### 8.1 Encapsulation : `private` / `public`
 
+> 🌍 **Dans la vraie vie :** un **distributeur de boissons** : tu appuies sur des **boutons** (choisir, payer, récupérer la monnaie), mais tu n'ouvres pas la machine pour prendre une canette ou piocher dans la caisse. La vitre protège l'intérieur.
+> → en Java : les boutons = méthodes `public`, l'intérieur = attributs `private`.
+
 | Mot-clé | Accessible depuis | Usage habituel |
 |---|---|---|
 | `private` | **uniquement** l'intérieur de la classe | les **attributs** (l'état est caché) |
@@ -338,6 +350,9 @@ flowchart LR
 ## 9. Les constructeurs et `new`
 
 💡 **L'idée :** pour créer un objet, on appelle un **constructeur** avec `new`. Chaque `new` crée un **nouvel** objet.
+
+> 🌍 **Dans la vraie vie :** pour obtenir une carte de bibliothèque, on remplit un **formulaire d'inscription** : la carte naît **déjà** avec ton nom, jamais « vide ». Il peut exister un formulaire complet et un formulaire express (valeurs par défaut), et chaque inscription délivre une **nouvelle** carte.
+> → en Java : `new Person("Alice", 2001)` = remplir le formulaire ; plusieurs constructeurs = plusieurs formulaires (comme les 2 constructeurs de `Book` au TP1).
 
 ```java
 new Thermometer()            // température initiale 0
@@ -391,6 +406,7 @@ variableId = expression;      // affectation : la valeur de expression doit êtr
 
 - Les variables sont **typées**, leur type est fixé **à la déclaration**.
 - Une variable objet **non initialisée** vaut **`null`** (elle ne référence rien).
+  📌 Précision : c'est vrai pour un **attribut**. Une variable **locale** doit être initialisée avant d'être utilisée, sinon le compilateur refuse (`variable might not have been initialized`). Le schéma ci-dessous représente l'idée du cours.
 - On peut déclarer et initialiser en même temps.
 
 ### 10.2 Suivre les références pas à pas (exemple du cours)
@@ -447,11 +463,17 @@ b.changeTemperature(30);
 a.temperatureInCelsius();   // ↦ 30 : a et b désignent le même objet
 ```
 
+> 🌍 **Dans la vraie vie :** `b = a`, c'est faire un **double de la clé** d'un appartement, pas construire un 2ᵉ appartement. Si quelqu'un repeint le salon en entrant avec la clé `b`, celui qui entre avec la clé `a` le trouve repeint.
+> → en Java : deux références, **un seul** objet ; pour un 2ᵉ objet, il faut un `new`.
+
 ---
 
 ## 11. `this` : l'auto-référence
 
 💡 **L'idée :** dans le code d'une méthode, **`this`** désigne **l'objet qui a reçu le message** (le receveur).
+
+> 🌍 **Dans la vraie vie :** la consigne « écris **ton** nom sur **ta** copie » est écrite **une seule fois** au tableau, mais chaque élève écrit le sien : pour celui qui l'exécute, « ton » veut dire « **moi** ».
+> → en Java : le code de `temperatureInCelsius()` est écrit une fois ; `this` = « moi, l'objet qui a reçu le message ».
 
 Le problème posé dans le cours :
 
@@ -533,6 +555,9 @@ th1.temperatureInFahrenheit();  // 68
 ## 12. Des objets qui collaborent : le thermostat
 
 💡 **L'idée :** un attribut peut être **un autre objet** ; on lui délègue le travail **par envoi de message**. Les messages s'enchaînent en **cascade** → c'est la dynamique du programme.
+
+> 🌍 **Dans la vraie vie :** un interrupteur ne produit pas de lumière : quand on appuie, il **demande** à l'ampoule de s'allumer ou de s'éteindre. Chacun son rôle.
+> → en Java : c'est `LightSwitch.push()` du TP2, qui envoie `turnOn()` / `turnOff()` à son attribut `bulb` ; ici, le thermostat délègue la mesure au thermomètre et le chauffage à la chaudière.
 
 ### 12.1 Les classes
 
@@ -830,7 +855,8 @@ public class ThermometerMain {
 
 | Erreur | Pourquoi c'est faux | Correction |
 |---|---|---|
-| `Thermometer t; t.temperatureInCelsius();` | `t` vaut `null` : aucun objet → `NullPointerException` | créer l'objet : `t = new Thermometer(20);` |
+| `Thermometer t = null; t.temperatureInCelsius();` | `t` vaut `null` : aucun objet → `NullPointerException` à l'exécution (même chose pour un **attribut** objet jamais initialisé) | créer l'objet : `t = new Thermometer(20);` |
+| `Thermometer t; t.temperatureInCelsius();` (variable **locale**) | ne compile même pas : `variable t might not have been initialized` | initialiser la variable avant de l'utiliser |
 | Croire que `th3 = th1;` copie l'objet | On copie la **référence** : un seul objet, deux accès | `new` pour avoir un 2ᵉ objet |
 | `return temperature;` vs `this.temperature` | Ça marche, mais le cours impose `this.` pour bien voir **à qui** appartient l'attribut | toujours écrire `this.attribut` |
 | `temperature = temperature;` dans le constructeur | Le paramètre **masque** l'attribut : on affecte le paramètre à lui-même | `this.temperature = temperature;` |
@@ -850,7 +876,7 @@ public class ThermometerMain {
 - Une **classe** définit un type objet : **état** (attributs, `private`) + **comportement** (méthodes, `public`).
 - Un **objet** (instance) est créé par **`new` + constructeur** ; chaque `new` crée un **nouvel** objet.
 - Un **constructeur** réserve la mémoire et **initialise** les attributs ; constructeur par défaut seulement si aucun autre.
-- Une variable objet contient une **référence** (télécommande), pas l'objet ; non initialisée elle vaut **`null`**.
+- Une variable objet contient une **référence** (télécommande), pas l'objet ; un attribut objet non initialisé vaut **`null`**.
 - Objet non référencé = **perdu** → garbage collector.
 - On agit sur un objet par **envoi de message** : `ref.methode(...)` ; le message doit être permis par le **type de la référence**.
 - **`this`** = le **receveur** du message, toujours défini dans une méthode.
@@ -995,6 +1021,7 @@ a) à l'exécution  b) à la compilation  c) jamais
 
 ## 🔗 Pour pratiquer
 
+- 🏋️ [Exercices d'entraînement (avec corrigé)](../06-Exercices/01-classes-et-objets/enonce.md)
 - 💻 [TP1 — TV library](../03-TP/TP1-tv-library/ENONCE.md) : utiliser des objets, références, envois de messages.
 - 💻 [TP2 — Light](../03-TP/TP2-light/ENONCE.md) : écrire ses propres classes (attributs, constructeurs, méthodes).
 - ✏️ [TD2 — Intervalles](../02-TD/TD2-intervalles/enonce.md) : analyse, `this`, méthodes prenant un objet en paramètre.

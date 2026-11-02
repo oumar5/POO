@@ -4,6 +4,8 @@
 > 📚 Cours : [01 — Classes et objets](../../01-Cours/01-classes-et-objets.md)
 > 📝 Préparation : lire l'énoncé et faire la **Q1**.
 
+> ✅ [Corrigé](./corrige.md) — essaie d'abord seul·e !
+
 ## 💡 Le contexte
 
 Un intervalle **fermé** `[a, b]` contient tous les entiers de `a` à `b` (bornes incluses).

@@ -4,6 +4,8 @@
 > 📚 Cours : [03 — Tests](../../01-Cours/03-tests.md) · [04 — Exceptions](../../01-Cours/04-exceptions.md) · 🛠️ [Memento](../../05-Fiches/memento-commandes.md)
 > 📝 Préparation : travail préparatoire obligatoire (classe `Room`, `RoomTest`).
 
+> ✅ [Corrigé](./CORRIGE.md) — essaie d'abord seul·e !
+
 ## 🗺️ Le sujet
 
 ```mermaid

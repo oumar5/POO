@@ -3,6 +3,8 @@
 > 🎯 **Objectifs** : compiler (`javac`), exécuter (`java`), séparer `src/` et `classes/`, écrire ses premières classes.
 > 📚 Cours : [01 — Classes et objets](../../01-Cours/01-classes-et-objets.md) · 🛠️ [Memento des commandes](../../05-Fiches/memento-commandes.md)
 
+> ✅ [Corrigé](./CORRIGE.md) — essaie d'abord seul·e !
+
 ## 🗺️ Plan du TP
 
 | Ex. | Thème | Ce que tu apprends |

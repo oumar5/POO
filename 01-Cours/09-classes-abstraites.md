@@ -61,6 +61,9 @@ public class ResizeTool { public void resize(Shape selectedShape) { selectedShap
 
 💡 **L'idée :** une classe abstraite est une classe « à trous » : du code commun **et** des méthodes laissées vides, à compléter par les sous-classes.
 
+> 🌍 **Dans la vraie vie :** au magasin de musique, on ne peut pas acheter « un instrument » en général : on achète une guitare, un piano, une flûte. « Instrument » reste une catégorie utile (un rayon, des points communs : s'accorder, se ranger dans un étui).
+> → en Java : `Shape` est abstraite (`new Shape()` interdit), mais `Shape s = new Circle();` est permis.
+
 1. **est une classe** → elle comporte des attributs et des méthodes ;
 2. **déclare des méthodes sans comportement** attaché : les **méthodes abstraites** ;
 3. **ne peut pas créer d'instance** (même si elle définit un constructeur) ;
@@ -90,6 +93,9 @@ En UML, la classe porte le stéréotype `<<abstract>>` (ou son nom en *italique*
 ## 5. Retour en forme : `Shape` abstraite
 
 💡 **L'idée :** `Shape` factorise attributs et code communs, et **laisse abstraites** les méthodes qui dépendent de la forme précise.
+
+> 🌍 **Dans la vraie vie :** un modèle de lettre de motivation : en-tête, formule de politesse et signature sont déjà rédigés, il reste un trou « [pourquoi ce poste] » que chaque candidat doit remplir. Une lettre avec un trou ne s'envoie pas !
+> → en Java : méthodes concrètes = parties rédigées (`setLineWidth`, `toFront`) ; méthodes abstraites = trous (`draw`, `rotate`…) que `Circle` doit compléter pour être instanciable.
 
 ```java
 public abstract class Shape {
@@ -175,6 +181,9 @@ classDiagram
 
 💡 **L'idée :** une classe abstraite peut avoir des **constructeurs** : ils ne servent pas à `new`, mais à **initialiser la partie commune** via `super(...)`.
 
+> 🌍 **Dans la vraie vie :** dans un jeu de rôle, toute fiche de personnage commence par les cases communes (points de vie, force), remplies au moment de choisir sa classe (orc, prudent…). Personne ne joue « un personnage » sans classe, mais la partie commune doit bien être remplie.
+> → en Java : le constructeur de `GameCharacter` ne sert jamais à `new`, il est appelé par `super(ORC_LIFEPOINTS, strength)`.
+
 ```java
 public abstract class GameCharacter {
     protected static final int DEFAULT_LIFEPOINTS = 12;
@@ -219,6 +228,9 @@ public class CarefulCharacter extends GameCharacter {
 ## 7. Interfaces et héritage
 
 💡 **L'idée :** une interface peut **étendre** une autre interface (`extends`), et même **plusieurs** : le multi-héritage est possible **entre interfaces**.
+
+> 🌍 **Dans la vraie vie :** un smartphone est à la fois un téléphone et un appareil photo : il accepte « appeler » **et** « prendre une photo », et doit savoir faire les deux.
+> → en Java : `interface MarinePredator extends Fish, Predator` cumule les deux contrats ; de même un `Cetacean` (`AquaticAnimal`) entre dans le zoo **et** dans l'aquarium.
 
 ```java
 public interface Aquatic { public boolean freshWaterOrNot(); }   // eau douce ou pas ?
@@ -288,6 +300,9 @@ classDiagram
 
 💡 **L'idée :** l'interface donne un **type** (un contrat), la classe abstraite donne un **type + du code commun**, la classe concrète donne un type **complet et instanciable**.
 
+> 🌍 **Dans la vraie vie :** interface = un **cahier des charges** (« 3 chambres, une cuisine ») sans une seule brique ; classe abstraite = une **maison en kit** : murs fournis, cuisine à installer soi-même, on ne peut pas y habiter telle quelle ; classe concrète = une maison **clé en main**, prête à habiter.
+> → en Java : `Aquatic` (interface), `Shape` (abstraite), `Circle` (concrète, `new` possible).
+
 | Critère | Classe concrète | Classe abstraite | Interface |
 |---|---|---|---|
 | Déclaration | `class C` | `abstract class C` | `interface I` |
@@ -313,6 +328,9 @@ flowchart TD
 ## 9. `final` : interdire l'héritage ou la redéfinition
 
 💡 **L'idée :** `final` ≈ « **constant** » : ce qui est `final` ne peut plus être modifié — ni étendu (classe), ni redéfini (méthode).
+
+> 🌍 **Dans la vraie vie :** le règlement officiel d'Othello : chaque club organise ses tournois à sa façon, mais personne n'a le droit de changer la règle qui retourne les pions encadrés.
+> → en Java : méthode `final` = règle héritée par toutes les sous-classes mais non redéfinissable ; classe `final` (comme `String`) = modèle qu'on ne peut pas décliner en sous-classes.
 
 ### Classe `final` : pas de sous-classe
 
@@ -342,6 +360,9 @@ public class SomeSubClasse extends SomeClass {
 ## 10. Application : intérêt d'une méthode `final`
 
 💡 **L'idée :** une méthode `final` **ferme le code à l'extension** : on **garantit le code exécuté**, quel que soit l'héritage.
+
+> 🌍 **Dans la vraie vie :** municipales, présidentielle ou référendum : l'isoloir et l'urne sont imposés par la loi, aucun organisateur ne peut décider de noter le nom du votant sur son bulletin.
+> → en Java : `vote` est `final` dans `Poll` : chaque type de scrutin en hérite sans pouvoir la redéfinir.
 
 Exemple : dans une classe `Poll` (scrutin), garantir l'**anonymat du votant** quel que soit le (sous-)type de scrutin.
 
@@ -442,6 +463,7 @@ Fermer le code à l'extension : aucune sous-classe ne peut redéfinir `vote`, do
 
 ## 🔗 Pour pratiquer
 
+- 🏋️ [Exercices d'entraînement (avec corrigé)](../06-Exercices/09-classes-abstraites/enonce.md)
 - [DS1 2025-2026 — sujet](../04-Examens/DS1-2025-2026/sujet.md)
 - [Checklist de révision](../05-Fiches/checklist-revision.md)
 

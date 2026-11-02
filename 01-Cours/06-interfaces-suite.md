@@ -82,6 +82,9 @@ Dans `ascendingSort(Person[] elements)` (idem `Carrot[]`, `String[]`), la condit
 
 💡 **L'idée :** la **seule** condition pour trier, c'est que les objets soient **comparables 2 à 2**, c.-à-d. disposent de `public int compareTo(...)` → c'est une **interface**.
 
+> 🌍 **Dans la vraie vie :** pour ranger des élèves par taille, le prof n'a besoin que d'une règle « qui passe avant l'autre ? », appliquée à 2 élèves à la fois ; pour le classement d'un tournoi (TD3), c'est « qui a le plus de points ? ».
+> → en Java : `a.compareTo(b)` répond à cette question (< 0 : `a` avant, 0 : ex æquo, > 0 : `a` après) et `implements Comparable<T>` annonce « on sait me comparer à un autre `T` ».
+
 ```java
 public interface Comparable<T> {      // existe déjà en Java, paquetage java.lang
     public int compareTo(T o);        // T représente le type des objets comparés
@@ -115,6 +118,9 @@ classDiagram
 ## 4. Le tri générique `BubbleSort`
 
 💡 **L'idée :** **un seul** algorithme de tri, qui s'applique à **toute** classe implémentant `Comparable`.
+
+> 🌍 **Dans la vraie vie :** la trieuse de La Poste trie lettres, colis, cartes postales… sans savoir ce qu'il y a dedans : il lui suffit que chaque envoi porte un code postal.
+> → en Java : `BubbleSort.sort` trie n'importe quel tableau d'objets `Comparable` ; le « code postal » qu'il lit, c'est `compareTo`.
 
 ```java
 public class BubbleSort {
@@ -205,6 +211,9 @@ public class ImageManipulator {                              // ❌ mauvaise ré
 
 💡 **L'idée :** **mixer** les deux approches : un **type `Image` commun** (prop. 1) **et** des **classes différentes** par format (prop. 2).
 
+> 🌍 **Dans la vraie vie :** un terminal de paiement accepte les cartes Visa, Mastercard… de n'importe quelle banque : il envoie toujours le même ordre « payer », chaque carte le traite à sa façon, pourvu qu'elle respecte la norme de la puce.
+> → en Java : `Image` est la norme, `JpgImage` / `GifImage` sont les cartes, `saveImage(Image img)` est le terminal qui se contente de `img.save()`.
+
 Pour obtenir des traitements différents avec **une même invocation**, il faut des objets **de même type** (une **interface** fixe les messages acceptés) mais **de classes différentes** (chacune implémente **son** comportement) → le **polymorphisme**.
 
 ```java
@@ -259,9 +268,15 @@ classDiagram
 - À l'extrême : **toujours commencer par définir des interfaces**, et seulement ensuite les classes qui les implémentent.
 - 📌 Devise : « **manipuler des abstractions et concrétiser le plus tard possible** ».
 
+> 🌍 **Dans la vraie vie :** une multiprise : pour brancher une nouvelle lampe ou un chargeur, on ne recâble pas la maison, on branche l'appareil s'il a la bonne prise.
+> → en Java : `ImageManipulator` est la multiprise (fermée aux modifications), l'interface `Image` est la prise standard, brancher `PngImage` est l'extension.
+
 ## 10. Remarque méthodologique : chasser les cascades de `if`
 
 💡 **L'idée :** une cascade de « si … alors … sinon » dont la condition porte sur un **type** est un **signal d'alarme**.
+
+> 🌍 **Dans la vraie vie :** un standardiste avec une fiche « si c'est pour la compta…, si c'est pour la RH…, si c'est… » doit réécrire toutes ses fiches à chaque nouveau service. Plus simple : chaque service a son numéro et gère lui-même ses appels.
+> → en Java : on remplace la cascade de `if` par une interface et une classe par cas ; chaque objet « sait » ce qu'il doit faire.
 
 **Recette :**
 1. identifier le(s) **point(s) commun(s)** entre les objets (a priori toutes les méthodes concernées) ;
@@ -391,6 +406,9 @@ new CounterGUI(new AnotherCounter(0));                        // CounterGUI inch
 ## 12. Le compteur (version 2) : abstraction de l'incrément
 
 💡 **L'idée :** en v1, `getCurrentValue()` et `initValue()` sont **recopiées** partout : la vraie abstraction est **la manière d'incrémenter**.
+
+> 🌍 **Dans la vraie vie :** une perceuse à embouts interchangeables : moteur, gâchette et batterie sont les mêmes, seul l'embout change selon qu'on visse ou qu'on perce. On n'achète pas une perceuse par embout !
+> → en Java : `Counter` est la perceuse (une seule classe), `IncrementFunction` est l'embout qu'on lui passe au constructeur (`SimpleIncrement`, `ModularIncrement`…).
 
 ```java
 public interface IncrementFunction { public int increment(int value); }
@@ -542,6 +560,7 @@ En v1, `getCurrentValue()` et `initValue()` sont **répétées** dans chaque cla
 
 ## 🔗 Pour pratiquer
 
+- 🏋️ [Exercices d'entraînement (avec corrigé)](../06-Exercices/06-interfaces-suite/enonce.md)
 - [TD Othello](../02-TD/TD-othello/enonce.md)
 - [TP Othello](../03-TP/TP-othello/ENONCE.md)
 

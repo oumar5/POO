@@ -4,6 +4,8 @@
 > 📚 Cours : [02 — static et enum](../../01-Cours/02-static-et-enum.md) · [03 — Tests](../../01-Cours/03-tests.md) · [04 — Exceptions](../../01-Cours/04-exceptions.md)
 > 📝 Préparation : lire l'énoncé et faire les **Q1, Q2, Q3**.
 
+> ✅ [Corrigé](./corrige.md) — essaie d'abord seul·e !
+
 ## 💡 Le principe d'un tournoi à élimination directe
 
 ```mermaid

@@ -50,6 +50,9 @@ flowchart TD
 
 💡 **L'idée :** une classe peut **hériter** d'une autre ; `extends` = « **est un cas particulier de** ».
 
+> 🌍 **Dans la vraie vie :** un colis express **est un** colis : poids, destinataire, livraison… avec juste un délai plus court en plus. De même, dans l'« arbre généalogique » des véhicules, un taxi est une voiture, qui est un véhicule : chaque niveau reprend tout ce qui est au-dessus et ajoute ou modifie quelque chose.
+> → en Java : `class ExpressParcel extends Parcel` ; et par transitivité `FragileParcel` ⊂ `InsuredParcel` ⊂ `Parcel`.
+
 ```java
 public class Parcel { ... }
 public class LightParcel   extends Parcel { ... }
@@ -187,6 +190,9 @@ fragileP.deliver();                  // hérité de InsuredParcel, qui l'hérite
 
 💡 **L'idée :** une sous-classe peut **redéfinir** une méthode héritée ; ses instances utilisent alors **sa** version.
 
+> 🌍 **Dans la vraie vie :** au signal « au travail ! », le boulanger pétrit, le facteur distribue, l'infirmière soigne : même consigne, exécution propre à chaque métier. L'apprenti qui n'a pas encore sa façon à lui applique celle de son maître.
+> → en Java : même signature `deliveryCost()`, mais `LightParcel` a **sa** version, tandis qu'`InsuredParcel` garde celle héritée de `Parcel`.
+
 ```java
 public class Parcel {
     private static final int BASE_COST = 3;
@@ -223,6 +229,9 @@ new LightParcel(timoleon).deliveryCost();           // → 2 : comportement red�
 ## 8. Construction : le super-constructeur `super(...)`
 
 💡 **L'idée :** les attributs hérités sont créés et initialisés par **un constructeur de la super-classe**, appelé avec `super(...)`.
+
+> 🌍 **Dans la vraie vie :** on construit une maison de bas en haut : d'abord les fondations, puis le rez-de-chaussée, et seulement ensuite l'étage ajouté. Impossible de poser l'étage avant les fondations !
+> → en Java : `super(...)`, en **1re instruction**, construit d'abord la partie héritée (`Parcel`), puis la sous-classe initialise ce qu'elle ajoute (`insuredValue`).
 
 📌 **Règles :**
 - `super(paramètres)` = appel d'un constructeur de la super-classe ;
@@ -324,6 +333,9 @@ catch (FoodException e) { ... }
 
 💡 **L'idée :** à l'exécution, la méthode est cherchée dans la classe de **l'objet**, puis en **remontant** la hiérarchie.
 
+> 🌍 **Dans la vraie vie :** pour la tarte aux pommes, tu cherches d'abord dans **ton** carnet de recettes ; si elle n'y est pas, dans celui de ta mère, puis de ta grand-mère… et tu prends la première trouvée.
+> → en Java : le lookup part de la classe de **l'objet** (pas du type de la référence) et remonte les super-classes jusqu'à trouver la méthode.
+
 ```java
 // dans DeliveryTruck
 public float totalDeliveryCost() {
@@ -423,6 +435,10 @@ public class Cetacean extends Mammal {
 
 💡 **L'idée :** `protected` se comporte **comme `public` pour les sous-classes** et **comme `private` pour les autres**.
 
+> 🌍 **Dans la vraie vie :** `private` = ton journal intime (toi seule) ; `protected` = la clé de la maison, donnée aux enfants mais pas aux passants ; `public` = la boîte aux lettres (tout le monde).
+> → en Java : `Cetacean` peut écrire `this.nbLegs`, mais `NotAParcel` ne peut pas toucher à `p.delivered`.
+> ⚠️ Limite : en Java, `protected` donne aussi la clé aux « voisins » du **même paquetage**.
+
 ```java
 public class Mammal {
     protected int nbLegs;                       // private → protected
@@ -465,6 +481,9 @@ public class Cetacean extends Mammal { public Cetacean() { super(0); } }   // l�
 ## 12. `super.m()` : réutiliser le comportement de la super-classe
 
 💡 **L'idée :** dans une redéfinition, `super.m()` exécute la version de `m` **définie pour la super-classe**, sans copier-coller son code.
+
+> 🌍 **Dans la vraie vie :** au guichet, le tarif express se calcule « tarif normal × 2 » : l'agent consulte la grille normale au lieu de tenir sa propre grille. Si la Poste change la grille normale, le tarif express suit tout seul.
+> → en Java : `return 2 * super.deliveryCost();` réutilise le calcul de la super-classe sans le recopier.
 
 Le problème : frais express = **double** des frais de base ; frais fragile = frais avec assurance **+ 5 €**. Si le calcul de `Parcel` change, ces colis doivent suivre **automatiquement**.
 
@@ -515,6 +534,9 @@ public class D extends B {
 ## 13. Transtypage : upcast, downcast et `instanceof`
 
 💡 **L'idée :** monter dans la hiérarchie (upcast) est toujours sûr ; descendre (downcast) est risqué et souvent signe d'une mauvaise conception.
+
+> 🌍 **Dans la vraie vie :** au refuge, on accueille « un animal » : on peut le nourrir ou le peser comme tout animal (upcast). Avant de lui demander d'aboyer, il faut **vérifier** que c'est bien un chien, sinon on demande à un chat d'aboyer ! Et le regarder comme un chien ne le transforme pas en chien.
+> → en Java : `Parcel p = insuredP;` puis `if (p instanceof InsuredParcel)` avant `((InsuredParcel) p).getInsuredValue()` ; sans test, risque de `ClassCastException`.
 
 | | Upcast | Downcast (complément) |
 |---|---|---|
@@ -691,6 +713,7 @@ Chaque nouveau type de colis oblige à modifier `DeliveryTruck` (viole l'OCP) et
 
 ## 🔗 Pour pratiquer
 
+- 🏋️ [Exercices d'entraînement (avec corrigé)](../06-Exercices/08-heritage/enonce.md)
 - [DS1 2025-2026 — sujet](../04-Examens/DS1-2025-2026/sujet.md)
 - [Checklist de révision](../05-Fiches/checklist-revision.md)
 

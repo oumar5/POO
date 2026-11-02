@@ -4,6 +4,8 @@
 > 📚 Cours : [01 — Classes et objets](../../01-Cours/01-classes-et-objets.md) · 🛠️ [Memento](../../05-Fiches/memento-commandes.md)
 > 📝 Préparation : travail préparatoire + intro à Git (semainier).
 
+> ✅ [Corrigé](./CORRIGE.md) — essaie d'abord seul·e !
+
 ## 🗺️ Les 3 classes
 
 ```mermaid

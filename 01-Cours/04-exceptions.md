@@ -26,6 +26,9 @@ flowchart TD
 
 💡 **L'idée :** quand une méthode ne peut pas faire son travail, elle doit le **signaler** clairement, sans mélanger ce signal avec les résultats normaux.
 
+> 🌍 **Dans la vraie vie :** quand ta carte est refusée, le terminal n'imprime pas un ticket « -1 € » (qu'on pourrait confondre avec un vrai montant) : il affiche **« PAIEMENT REFUSÉ »**, et le caissier doit réagir.
+> → en Java : plutôt qu'une valeur spéciale (`-1`), on lance une **exception**, impossible à confondre avec un résultat normal.
+
 | Par une **valeur de retour** spéciale (ex. `-1`) | Par une **exception** |
 |---|---|
 | ⚠️ difficile à traiter : l'appelant doit tester chaque retour, et `-1` peut être une valeur valide | signale le problème **là où il se pose** ; **sépare** cas normaux et cas exceptionnels ; transmet au **gestionnaire d'exceptions** (*exception handler*) |
@@ -83,6 +86,9 @@ classDiagram
 ## 4. Quand personne ne capture : la trace de pile
 
 💡 **L'idée :** une exception non capturée **remonte** de méthode appelante en méthode appelante jusqu'à `main`, puis **arrête** le programme en affichant la pile d'appels.
+
+> 🌍 **Dans la vraie vie :** un employé voit de la fumée, ne sait pas la traiter et prévient son chef, qui prévient le directeur… Si **personne** ne s'en occupe, l'**alarme incendie** fait évacuer tout l'immeuble, et le rapport indique où le feu est né et par qui l'alerte est passée.
+> → en Java : la remontée = propagation vers les appelants ; l'évacuation = arrêt du programme ; le rapport = la **trace de pile**.
 
 ```java
 package cours4;
@@ -157,6 +163,9 @@ public int sumOfLimitElements(int limit) {
 ## 6. Capturer une exception : `try` / `catch`
 
 💡 **L'idée :** on **essaie** d'exécuter un code « normalement », et **si** une exception survient, on la **capture** pour indiquer le traitement à faire.
+
+> 🌍 **Dans la vraie vie :** « j'**essaie** de payer par carte ; **si** elle est refusée, je paie en espèces ». Le plan B **règle** le problème ; dire juste « oups, refusé » et partir sans payer ne règle rien.
+> → en Java : `try` = le plan A, `catch` = le plan B (un vrai **code correctif**, pas seulement un `println`).
 
 ```java
 try {
@@ -260,9 +269,15 @@ catch (Exception e) { e.printStackTrace(); }
 - Forme 1 : traitements **différents** ; forme 2 : **même** traitement ; forme 3 : ⚠️ à éviter, elle masque aussi les erreurs **imprévues**.
 - ⚠️ Le **premier** `catch` qui correspond est choisi : du **plus précis au plus général** (un `catch (Exception e)` en premier rend les suivants inaccessibles → erreur de compilation).
 
+> 🌍 **Dans la vraie vie :** à l'accueil des urgences, on oriente d'abord vers le **spécialiste** (cardiologue pour le cœur, ophtalmo pour les yeux), et le **médecin généraliste** reçoit le reste. Si le généraliste était placé en premier, les spécialistes ne verraient jamais personne.
+> → en Java : `catch (ArithmeticException e)` avant `catch (Exception e)`.
+
 ## 9. Ne pas capturer : signaler avec `throws`
 
 💡 **L'idée :** si une méthode **ne veut pas (ou ne peut pas)** traiter l'exception, elle doit **prévenir** son utilisateur qu'elle peut la générer.
+
+> 🌍 **Dans la vraie vie :** un colis étiqueté **« FRAGILE »** : l'expéditeur ne gère pas lui-même la casse, il **prévient** ceux qui vont le manipuler pour qu'ils prennent leurs précautions.
+> → en Java : `throws XxxException` dans la signature (+ `@throws` dans la javadoc) = l'étiquette ; l'appelant, prévenu, choisit de capturer ou de faire suivre.
 
 ⇒ ajouter **`throws ClasseDException`** à la **signature** + documentation **`@exception`**.
 
@@ -301,6 +316,9 @@ public static void main(String[] args) {
 ## 10. Déclencher une exception : `throw`
 
 💡 **L'idée :** c'est **ma** méthode qui détecte un cas anormal (ex. paramètre invalide) et qui **lance** l'exception.
+
+> 🌍 **Dans la vraie vie :** le réceptionniste d'un hôtel à qui l'on demande une chambre déjà occupée (ou la n° 999 qui n'existe pas) **refuse** net, avec un motif précis, plutôt que de donner une clé au hasard.
+> → en Java : `throw new RoomNotAvailableException()` dans `rentRoom` (TP4) ; de même `NotPowerOf2Exception` (TD3) ou `InvalidPositionException` hors du plateau d'Othello.
 
 ① **créer** un objet exception (de la classe voulue) ; ② le **« lancer »** avec **`throw`** ; ③ la signature doit **annoncer** l'exception (**`throws`**). 📌 Bien **choisir la classe** : son nom doit aider à identifier le problème.
 
@@ -342,6 +360,9 @@ public static void main(String[] args) {
 
 💡 **L'idée :** la levée d'exception fait partie de la **spécification** ⇒ elle se **teste** comme le reste (cf. [ch. 03](./03-tests.md)).
 
+> 🌍 **Dans la vraie vie :** on teste un **détecteur de fumée** en approchant volontairement de la fumée : le test est réussi **si** l'alarme sonne. Et il ne doit pas sonner quand on fait simplement bouillir de l'eau.
+> → en Java : `assertThrows(...)` vérifie que l'exception part dans le cas prévu ; un appel valide vérifie qu'elle ne part pas « à tort ».
+
 - Construire la logique du test pour aboutir à une situation où l'exception **devrait** être déclenchée.
 - Utiliser **`assertThrows(ExpectedException.class, () -> tested_expression)`** : réussie **si et seulement si** l'expression déclenche l'exception mentionnée (et les autres assertions éventuelles sont valides) ; `() -> ...` est une **lambda** : le code « emballé » pour que JUnit le lance lui-même.
 
@@ -364,6 +385,9 @@ public void endOfTimoThrowsExceptionWhenIndexNegative() {
 ## 12. Réessayer après une erreur
 
 💡 **L'idée :** placer le `try` dans une **boucle** pour recommencer tant que le traitement échoue.
+
+> 🌍 **Dans la vraie vie :** au distributeur de billets, un code PIN erroné affiche « code incorrect, recommencez » au lieu d'avaler la carte : on **redemande** jusqu'à une saisie valide.
+> → en Java : `while (!done) { try { ...; done = true; } catch (...) { ... } }`.
 
 ```java
 boolean done = false;
@@ -491,6 +515,7 @@ public void endOfTimoThrowsExceptionWhenIndexTooHigh() {
 
 ## 🔗 Pour pratiquer
 
+- 🏋️ [Exercices d'entraînement (avec corrigé)](../06-Exercices/04-exceptions/enonce.md)
 - [TP4 — hôtel](../03-TP/TP4-hotel/ENONCE.md)
 - [TD3 — tournois](../02-TD/TD3-tournois/enonce.md)
 - [TD — Othello](../02-TD/TD-othello/enonce.md)

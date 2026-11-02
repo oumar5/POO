@@ -3,6 +3,7 @@
 > 🎯 **Objectifs** : **analyser** un problème en classes (UML), lever une exception, éliminer du code dupliqué avec un **`enum` de directions**, écrire un **algorithme** de jeu et ses **tests**.
 > 📚 Cours : [01 — Classes et objets](../../01-Cours/01-classes-et-objets.md) · [02 — static et enum](../../01-Cours/02-static-et-enum.md) · [03 — Tests](../../01-Cours/03-tests.md) · [04 — Exceptions](../../01-Cours/04-exceptions.md)
 > 📝 Préparation : lire l'énoncé et faire la **Q1**. → Ce TD prépare le [TP Othello](../../03-TP/TP-othello/ENONCE.md).
+> ✅ [Corrigé](./corrige.md) — essaie d'abord seul·e !
 
 ---
 

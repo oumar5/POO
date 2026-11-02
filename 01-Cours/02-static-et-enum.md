@@ -64,6 +64,9 @@ flowchart LR
 
 💡 **L'idée :** un attribut `static` existe en **un seul exemplaire**, rattaché à la **classe** et non aux objets.
 
+> 🌍 **Dans la vraie vie :** dans une salle de classe, chaque élève a **son propre cahier** (ses notes à lui), mais il n'y a qu'**un seul tableau d'affichage**, commun à tous et présent même quand la salle est vide.
+> → en Java : cahier = attribut d'instance (`this.radius`) ; tableau d'affichage = attribut `static` (`Disc.pi`).
+
 - La définition d'une classe est **unique** ⇒ ses attributs de classe aussi.
 - Créés quand la classe est **chargée en mémoire par la JVM**, quel que soit le nombre d'instances (**y compris 0**).
 - Pas besoin d'instance pour utiliser une caractéristique statique.
@@ -115,6 +118,9 @@ public class StaticExample {
 
 💡 **L'idée :** `static` (un seul exemplaire) + `final` (non modifiable) = **constante**.
 
+> 🌍 **Dans la vraie vie :** « 1 heure = 60 minutes » est gravé une fois pour toutes, identique pour tout le monde : personne n'a sa version perso, et personne ne peut la changer.
+> → en Java : `public static final int MINUTES_PER_HOUR = 60;` (un seul exemplaire, figé, en MAJUSCULES).
+
 ```java
 public class ConstantExample {
     public static final float PI = 3.141592f;
@@ -138,6 +144,9 @@ public class ConstantExample {
 ## 4. Un compteur partagé : l'exemple `Order`
 
 💡 **L'idée :** un attribut `private static` = valeur **partagée** par les instances, ici pour les numéroter.
+
+> 🌍 **Dans la vraie vie :** au rayon boucherie, il y a **un seul** distributeur de tickets pour tous les clients ; chaque client repart avec **son** numéro (n° 1, n° 2…) et le distributeur avance d'un cran.
+> → en Java : le distributeur = `Order.counter` (`static`, partagé) ; le ticket = `this.id` (propre à chaque commande).
 
 ```java
 public class Order {
@@ -188,6 +197,9 @@ flowchart TD
 ## 5. Méthodes de classe (`static`)
 
 💡 **L'idée :** une méthode dont le traitement **ne dépend pas de l'état d'un objet** n'a pas besoin d'objet.
+
+> 🌍 **Dans la vraie vie :** pour savoir combien font 45 € en dollars, tu consultes **le** convertisseur affiché au bureau de change : tu n'en achètes pas un perso, et le résultat ne dépend **que** du montant donné. Ce convertisseur n'a pas de « moi » à consulter.
+> → en Java : `Math.sqrt(16)`, `Tools.isPowerOf2(n)` (TD3) : on passe par le nom de la classe, et pas de `this`.
 
 **Le problème : calculer un sinus.** Signature : `public double sin(double x)`, définie dans une classe `Trigonometry`. Invocation ⇒ **il faut un objet**…
 
@@ -252,6 +264,9 @@ flowchart TD
 
 💡 **L'idée :** quand un type n'a qu'un **ensemble fini de valeurs connues à l'avance**, on les **énumère**.
 
+> 🌍 **Dans la vraie vie :** sur un site de vêtements, la taille se choisit dans une liste **fermée** S / M / L / XL : impossible de taper « moyen-grand ». Pareil pour les niveaux d'une carte de fidélité.
+> → en Java : `enum` ; c'est `PremiumLevel` (SILVER/GOLD/PLATINUM) du TP3, `Level` du TD3, `Color` (BLACK/WHITE) d'Othello.
+
 > **Type énuméré** : type qui comprend un ensemble fini de valeurs connues dès la création du type. On le construit par énumération de ces valeurs.
 
 ```java
@@ -310,6 +325,9 @@ E.values()[e.ordinal()] == e
 ```java
 E.values()[(e.ordinal() + 1) % E.values().length]
 ```
+
+> 🌍 **Dans la vraie vie :** les jours de la semaine forment une **boucle** : après dimanche revient lundi, comme les aiguilles d'une horloge repassent par 12.
+> → en Java : le `% E.values().length` fait « reboucler » l'indice sur 0 après la dernière valeur.
 
 ```mermaid
 flowchart LR
@@ -398,9 +416,15 @@ public class Season {
 
 📌 **Pourquoi le constructeur est-il privé ?** Pour qu'aucune autre classe ne puisse faire `new Season(...)` : les 4 instances sont les **seules** possibles. En Java ≤ 1.4, cette logistique était à faire soi-même.
 
+> 🌍 **Dans la vraie vie :** un jeu de 52 cartes contient **un seul** as de cœur, imprimé à l'usine ; un joueur ne peut pas en fabriquer un 2ᵉ. Deux joueurs qui parlent de « l'as de cœur » parlent forcément de **la même** carte.
+> → en Java : constructeur `private` (pas de nouvelle instance) ⇒ comparer avec `==` suffit.
+
 ## 11. Enrichir un `enum` : attributs, constructeur, méthodes
 
 💡 **L'idée :** ce sont des classes ⇒ on peut **ajouter** attributs, méthodes et constructeurs **privés**.
+
+> 🌍 **Dans la vraie vie :** un feu tricolore n'a que 3 couleurs, mais chacune **porte une consigne** : vert → on passe, orange → on s'arrête si possible, rouge → on s'arrête.
+> → en Java : chaque constante reçoit ses valeurs via le constructeur privé (`monday(true)`) et répond à des méthodes (`isWorkingDay()`).
 
 ```java
 public enum Day {
@@ -536,6 +560,7 @@ public enum Coin {
 
 ## 🔗 Pour pratiquer
 
+- 🏋️ [Exercices d'entraînement (avec corrigé)](../06-Exercices/02-static-et-enum/enonce.md)
 - [TP3 — member](../03-TP/TP3-member/ENONCE.md)
 - [TD3 — tournois](../02-TD/TD3-tournois/enonce.md)
 - [DS1 2025-2026 — sujet](../04-Examens/DS1-2025-2026/sujet.md)

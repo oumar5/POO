@@ -70,6 +70,9 @@ for (int i = 0; i < trashcan.length; i++) { trashcan[i].recycle(); }   // trashc
 
 💡 **L'idée :** une **interface** est un **type objet** qui définit les **envois de messages autorisés**, sans dire comment y répondre.
 
+> 🌍 **Dans la vraie vie :** une annonce « Cherche baby-sitter : sait **faire manger**, **coucher** et **surveiller** les enfants » liste des tâches, sans dire **comment** les faire. C'est un **contrat**.
+> → en Java : l'interface = la liste des signatures (sans corps) ; chaque candidat fera les tâches à sa manière.
+
 ```java
 public interface Recyclable {
     /** recycling process for this Recyclable object */
@@ -83,6 +86,9 @@ public interface Recyclable {
 ## 4. Implémenter une interface
 
 💡 **L'idée :** avec `implements`, une classe **promet** de fournir le code de **chaque** méthode de l'interface.
+
+> 🌍 **Dans la vraie vie :** **signer** le contrat de baby-sitter engage à assurer **toutes** les tâches listées ; un candidat qui ne sait pas coucher les enfants ne peut pas signer.
+> → en Java : `class Paper implements Recyclable` ; une méthode oubliée → le compilateur refuse la « signature ».
 
 ```java
 public class Paper implements Recyclable { public void tear() { ... }  public void recycle() { ... } }
@@ -118,6 +124,9 @@ classDiagram
 
 💡 **L'idée :** les instances d'une classe qui implémente une interface sont **aussi** du type de l'interface → c'est le **polymorphisme**.
 
+> 🌍 **Dans la vraie vie :** une même personne est à la fois « étudiante », « titulaire du permis » et « donneuse de sang » : selon le guichet (fac, préfecture, centre de don), on la considère sous l'un de ces **rôles**.
+> → en Java : un objet `Paper` est à la fois un `Paper`, un `Recyclable` (et un `Flammable` au § 8).
+
 - La classe est un « **sous-type** » de l'interface : `Paper ⊂ Recyclable` et `Bottle ⊂ Recyclable`.
 
 ```java
@@ -134,6 +143,9 @@ for (int i = 0; i < trashcan.length; i++) {
 ## 6. La référence n'est pas l'objet !
 
 💡 **L'idée :** le **type de la référence** décide de ce qu'on a le **droit d'envoyer** ; la **classe de l'objet** décide du **code exécuté**.
+
+> 🌍 **Dans la vraie vie :** au centre de don du sang, l'infirmière ne te parle **que** du don, même si tu es aussi étudiante : elle ne peut pas te demander ta copie de partiel. Mais c'est bien **toi**, avec ta propre façon de faire, qui donnes ton sang.
+> → en Java : avec `Recyclable r`, seul `recycle()` est permis (`r.tear()` refusé), mais c'est le code de `Paper` qui s'exécute.
 
 ```java
 Paper p = new Paper();
@@ -164,6 +176,9 @@ flowchart LR
 ## 7. Une interface est un type… abstrait
 
 💡 **L'idée :** on utilise une interface **partout où on utilise une classe** comme type, mais on ne peut **pas** l'instancier.
+
+> 🌍 **Dans la vraie vie :** chez un concessionnaire, on n'achète pas « un véhicule » en général : on repart avec une Clio, un scooter… « Véhicule » sert à **désigner**, pas à **fabriquer**.
+> → en Java : `Recyclable r = new Paper();` ✅ mais `new Recyclable()` ❌.
 
 ```java
 public void aMethod(Recyclable r) { ... }  // sur r : QUE des méthodes du type Recyclable
@@ -200,6 +215,9 @@ public class Paper implements Recyclable, Flammable {
 ## 9. Le late binding
 
 💡 **L'idée :** en POO, **on ne sait qu'à l'exécution** quelle méthode va répondre à un message.
+
+> 🌍 **Dans la vraie vie :** sur une **télécommande universelle**, le bouton « play » existe toujours (vérifiable dès l'achat), mais ce qui se passe dépend de l'appareil connecté **au moment où on appuie** : lecteur Blu-ray, chaîne hi-fi, box TV…
+> → en Java : le compilateur vérifie que `recycle()` existe dans `Recyclable` ; le code exécuté est choisi **à l'exécution**, selon la classe de l'objet.
 
 | | **Early binding** (ex. C) | **Late binding** (POO) |
 |---|---|---|
@@ -245,6 +263,9 @@ flowchart TD
 
 💡 **L'idée :** une **référence n'a qu'un seul type**, un **objet peut en avoir plusieurs**. « Caster » = créer une **autre référence**, d'un autre type, **vers le même objet**.
 
+> 🌍 **Dans la vraie vie :** dire « ce sac de sport est **un sac** » est toujours vrai (upcast, sûr). Récupérer « un sac » à la consigne et affirmer « c'est **mon sac de sport** » est un pari : si c'est un cartable, la mauvaise surprise arrive à l'ouverture (downcast, risqué).
+> → en Java : upcast implicite ; `(Paper) ref` compile, mais `ClassCastException` à l'exécution si l'objet est un `Bottle`.
+
 | | **UpCast** (généralisation) | **DownCast** (spécialisation) |
 |---|---|---|
 | Sens | vers un type **moins spécifique** (toujours possible vers `Object`) | vers un type **plus spécifique** |
@@ -269,6 +290,9 @@ for (int i = 0; i < trashcan.length; i++) {
 ## 11. Exemple : interrupteurs et appareils
 
 💡 **L'idée :** deux classes d'interrupteurs **quasi identiques** → on extrait ce dont l'interrupteur a **besoin** dans une interface.
+
+> 🌍 **Dans la vraie vie :** une **prise électrique standard** ne sait pas ce qu'on y branche : lampe, guirlande ou télé, tout appareil muni de la bonne fiche fonctionne. Inutile d'installer une prise différente par appareil.
+> → en Java : `Device` = la norme de la prise ; un seul `DeviceSwitch` pour `LightBulb`, `LightString`, `Tv` (les ampoules et guirlandes du TP2).
 
 - `LightBulb` (ampoule) : méthodes exclusives `getPower()`, `getColor()`, constructeur `LightBulb(int, String)`.
 - `LightString` (guirlande) : méthodes exclusives `size()`, `getNthBulb()`, constructeur `LightString(int)`.
@@ -540,6 +564,7 @@ Pour `i = 1`, l'objet est un `Bottle` : le downcast échoue → **`ClassCastExce
 
 ## 🔗 Pour pratiquer
 
+- 🏋️ [Exercices d'entraînement (avec corrigé)](../06-Exercices/05-polymorphisme-et-interfaces/enonce.md)
 - [TD Othello](../02-TD/TD-othello/enonce.md)
 - [TP Othello](../03-TP/TP-othello/ENONCE.md)
 
