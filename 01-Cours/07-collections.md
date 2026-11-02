@@ -610,6 +610,7 @@ for (Map.Entry<String,Book> entry : table.entrySet()) {
 ## 🔗 Pour pratiquer
 
 - 🏋️ [Exercices d'entraînement (avec corrigé)](../06-Exercices/07-collections/enonce.md)
+- [TD Location de véhicules — `List<Vehicle>`](../02-TD/TD-agence/enonce.md)
 - [TP Othello](../03-TP/TP-othello/ENONCE.md)
 
 ---

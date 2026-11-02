@@ -519,6 +519,8 @@ public void endOfTimoThrowsExceptionWhenIndexTooHigh() {
 - [TP4 — hôtel](../03-TP/TP4-hotel/ENONCE.md)
 - [TD3 — tournois](../02-TD/TD3-tournois/enonce.md)
 - [TD — Othello](../02-TD/TD-othello/enonce.md)
+- [TD — Location de véhicules](../02-TD/TD-agence/enonce.md) (`UnknownVehicleException`)
+- [TP6 — Manipulation d'images](../03-TP/TP6-images/ENONCE.md) (`UnknownPixelException`)
 
 ---
 

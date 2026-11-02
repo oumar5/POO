@@ -34,10 +34,10 @@ flowchart LR
 | 01 | [Classes et objets](./01-Cours/01-classes-et-objets.md) | [🏋️](./06-Exercices/01-classes-et-objets/enonce.md) | [TD2 Intervalles](./02-TD/TD2-intervalles/enonce.md) | [TP1](./03-TP/TP1-tv-library/ENONCE.md) · [TP2](./03-TP/TP2-light/ENONCE.md) | DS1 |
 | 02 | [static et enum](./01-Cours/02-static-et-enum.md) | [🏋️](./06-Exercices/02-static-et-enum/enonce.md) | [TD3 Tournois](./02-TD/TD3-tournois/enonce.md) | [TP3](./03-TP/TP3-member/ENONCE.md) | DS1 |
 | 03 | [Tests unitaires](./01-Cours/03-tests.md) | [🏋️](./06-Exercices/03-tests/enonce.md) | [TD3 Tournois](./02-TD/TD3-tournois/enonce.md) | [TP4](./03-TP/TP4-hotel/ENONCE.md) | DS1 |
-| 04 | [Exceptions](./01-Cours/04-exceptions.md) | [🏋️](./06-Exercices/04-exceptions/enonce.md) | [TD3](./02-TD/TD3-tournois/enonce.md) · [TD Othello](./02-TD/TD-othello/enonce.md) | [TP4](./03-TP/TP4-hotel/ENONCE.md) · [TP Othello](./03-TP/TP-othello/ENONCE.md) | DS1 |
-| 05 | [Polymorphisme et interfaces](./01-Cours/05-polymorphisme-et-interfaces.md) | [🏋️](./06-Exercices/05-polymorphisme-et-interfaces/enonce.md) | [TD Othello](./02-TD/TD-othello/enonce.md) | [TP Othello](./03-TP/TP-othello/ENONCE.md) | |
-| 06 | [Interfaces (suite)](./01-Cours/06-interfaces-suite.md) | [🏋️](./06-Exercices/06-interfaces-suite/enonce.md) | | [TP Othello](./03-TP/TP-othello/ENONCE.md) | |
-| 07 | [Collections](./01-Cours/07-collections.md) | [🏋️](./06-Exercices/07-collections/enonce.md) | | [TP Othello](./03-TP/TP-othello/ENONCE.md) | |
+| 04 | [Exceptions](./01-Cours/04-exceptions.md) | [🏋️](./06-Exercices/04-exceptions/enonce.md) | [TD3](./02-TD/TD3-tournois/enonce.md) · [TD Othello](./02-TD/TD-othello/enonce.md) · [TD Agence](./02-TD/TD-agence/enonce.md) | [TP4](./03-TP/TP4-hotel/ENONCE.md) · [TP Othello](./03-TP/TP-othello/ENONCE.md) · [TP6](./03-TP/TP6-images/ENONCE.md) | DS1 |
+| 05 | [Polymorphisme et interfaces](./01-Cours/05-polymorphisme-et-interfaces.md) | [🏋️](./06-Exercices/05-polymorphisme-et-interfaces/enonce.md) | [TD Interfaces](./02-TD/TD-interfaces/enonce.md) · [TD Othello](./02-TD/TD-othello/enonce.md) | [TP Othello](./03-TP/TP-othello/ENONCE.md) · [TP6 Images](./03-TP/TP6-images/ENONCE.md) | |
+| 06 | [Interfaces (suite)](./01-Cours/06-interfaces-suite.md) | [🏋️](./06-Exercices/06-interfaces-suite/enonce.md) | [TD Interfaces](./02-TD/TD-interfaces/enonce.md) · [TD Agence](./02-TD/TD-agence/enonce.md) | [TP6 Images](./03-TP/TP6-images/ENONCE.md) · [TP Othello](./03-TP/TP-othello/ENONCE.md) | |
+| 07 | [Collections](./01-Cours/07-collections.md) | [🏋️](./06-Exercices/07-collections/enonce.md) | [TD Agence](./02-TD/TD-agence/enonce.md) | [TP Othello](./03-TP/TP-othello/ENONCE.md) | |
 | 08 | [Héritage](./01-Cours/08-heritage.md) | [🏋️](./06-Exercices/08-heritage/enonce.md) | | | |
 | 09 | [Classes abstraites et final](./01-Cours/09-classes-abstraites.md) | [🏋️](./06-Exercices/09-classes-abstraites/enonce.md) | | | |
 

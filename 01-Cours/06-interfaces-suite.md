@@ -561,6 +561,9 @@ En v1, `getCurrentValue()` et `initValue()` sont **répétées** dans chaque cla
 ## 🔗 Pour pratiquer
 
 - 🏋️ [Exercices d'entraînement (avec corrigé)](../06-Exercices/06-interfaces-suite/enonce.md)
+- [TD Interfaces — transformations de texte, opérateurs](../02-TD/TD-interfaces/enonce.md)
+- [TD Location de véhicules — filtres et OCP](../02-TD/TD-agence/enonce.md)
+- [TP6 — Manipulation d'images](../03-TP/TP6-images/ENONCE.md)
 - [TD Othello](../02-TD/TD-othello/enonce.md)
 - [TP Othello](../03-TP/TP-othello/ENONCE.md)
 

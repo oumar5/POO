@@ -51,6 +51,7 @@ flowchart LR
 
 ## 06 — [Interfaces (suite)](../01-Cours/06-interfaces-suite.md)
 - [ ] J'implémente `Comparable<T>` (`compareTo`) pour pouvoir **trier** mes objets.
+- [ ] Je remplace des méthodes presque identiques par **une interface + une méthode générique** (ex. filtres du [TD Agence](../02-TD/TD-agence/enonce.md)).
 - [ ] J'explique le principe **ouvert/fermé (OCP)** et pourquoi les interfaces l'appliquent.
 
 ## 07 — [Collections](../01-Cours/07-collections.md)

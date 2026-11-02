@@ -565,7 +565,9 @@ Pour `i = 1`, l'objet est un `Bottle` : le downcast échoue → **`ClassCastExce
 ## 🔗 Pour pratiquer
 
 - 🏋️ [Exercices d'entraînement (avec corrigé)](../06-Exercices/05-polymorphisme-et-interfaces/enonce.md)
+- [TD Interfaces — zoo, transformations de texte, expressions](../02-TD/TD-interfaces/enonce.md)
 - [TD Othello](../02-TD/TD-othello/enonce.md)
+- [TP6 — Manipulation d'images](../03-TP/TP6-images/ENONCE.md) (`Image implements ImageInterface`)
 - [TP Othello](../03-TP/TP-othello/ENONCE.md)
 
 ---

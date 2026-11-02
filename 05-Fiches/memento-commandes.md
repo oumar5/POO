@@ -104,6 +104,12 @@ java -jar othello.jar
 | `e` | point d'entrée (classe contenant le `main`) |
 | `-C classes .` | prendre tout le contenu de `classes/` |
 
+📌 Ajouter des **ressources** (ex. le dossier `images/` du TP6) à la racine du jar : on les liste avant `-C`, comme un paquetage :
+```bash
+jar cvfe image.jar image.ImageMain images -C classes image
+java -jar image.jar /images/lamp.pgm 10
+```
+
 ## 6. Rendre son travail — Git / GitLab
 
 ```bash
