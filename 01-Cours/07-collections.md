@@ -611,6 +611,7 @@ for (Map.Entry<String,Book> entry : table.entrySet()) {
 
 - 🏋️ [Exercices d'entraînement (avec corrigé)](../06-Exercices/07-collections/enonce.md)
 - [TD Location de véhicules — `List<Vehicle>`](../02-TD/TD-agence/enonce.md)
+- [TP6bis — Collecte de fonds (`Map<String, List<Donation>>`)](../03-TP/TP6bis-collecte-fonds/ENONCE.md)
 - [TP Othello](../03-TP/TP-othello/ENONCE.md)
 
 ---

@@ -515,6 +515,7 @@ java -jar junit-console.jar -classpath test:classes -scan-classpath
 
 - 🏋️ [Exercices d'entraînement (avec corrigé)](../06-Exercices/03-tests/enonce.md)
 - [TP4 — hôtel](../03-TP/TP4-hotel/ENONCE.md)
+- [TP6bis — Collecte de fonds](../03-TP/TP6bis-collecte-fonds/ENONCE.md) (écrire toute la classe de test)
 - [TD3 — tournois](../02-TD/TD3-tournois/enonce.md)
 - [Mémento des commandes (javac, JUnit, javadoc)](../05-Fiches/memento-commandes.md)
 

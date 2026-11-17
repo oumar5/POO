@@ -37,9 +37,9 @@ flowchart LR
 | 04 | [Exceptions](./01-Cours/04-exceptions.md) | [🏋️](./06-Exercices/04-exceptions/enonce.md) | [TD3](./02-TD/TD3-tournois/enonce.md) · [TD Othello](./02-TD/TD-othello/enonce.md) · [TD Agence](./02-TD/TD-agence/enonce.md) | [TP4](./03-TP/TP4-hotel/ENONCE.md) · [TP Othello](./03-TP/TP-othello/ENONCE.md) · [TP6](./03-TP/TP6-images/ENONCE.md) | DS1 |
 | 05 | [Polymorphisme et interfaces](./01-Cours/05-polymorphisme-et-interfaces.md) | [🏋️](./06-Exercices/05-polymorphisme-et-interfaces/enonce.md) | [TD Interfaces](./02-TD/TD-interfaces/enonce.md) · [TD Othello](./02-TD/TD-othello/enonce.md) | [TP Othello](./03-TP/TP-othello/ENONCE.md) · [TP6 Images](./03-TP/TP6-images/ENONCE.md) | |
 | 06 | [Interfaces (suite)](./01-Cours/06-interfaces-suite.md) | [🏋️](./06-Exercices/06-interfaces-suite/enonce.md) | [TD Interfaces](./02-TD/TD-interfaces/enonce.md) · [TD Agence](./02-TD/TD-agence/enonce.md) | [TP6 Images](./03-TP/TP6-images/ENONCE.md) · [TP Othello](./03-TP/TP-othello/ENONCE.md) | |
-| 07 | [Collections](./01-Cours/07-collections.md) | [🏋️](./06-Exercices/07-collections/enonce.md) | [TD Agence](./02-TD/TD-agence/enonce.md) | [TP Othello](./03-TP/TP-othello/ENONCE.md) | |
-| 08 | [Héritage](./01-Cours/08-heritage.md) | [🏋️](./06-Exercices/08-heritage/enonce.md) | | | |
-| 09 | [Classes abstraites et final](./01-Cours/09-classes-abstraites.md) | [🏋️](./06-Exercices/09-classes-abstraites/enonce.md) | | | |
+| 07 | [Collections](./01-Cours/07-collections.md) | [🏋️](./06-Exercices/07-collections/enonce.md) | [TD Agence](./02-TD/TD-agence/enonce.md) | [TP6bis Collecte de fonds](./03-TP/TP6bis-collecte-fonds/ENONCE.md) · [TP Othello](./03-TP/TP-othello/ENONCE.md) | |
+| 08 | [Héritage](./01-Cours/08-heritage.md) | [🏋️](./06-Exercices/08-heritage/enonce.md) | [TD Héritage (annales DS2)](./02-TD/TD-heritage/enonce.md) | | DS2 |
+| 09 | [Classes abstraites et final](./01-Cours/09-classes-abstraites.md) | [🏋️](./06-Exercices/09-classes-abstraites/enonce.md) | [TD Héritage (annales DS2)](./02-TD/TD-heritage/enonce.md) | | DS2 |
 
 ## 🚀 Accès rapides
 - 🛠️ [Memento des commandes](./05-Fiches/memento-commandes.md) — `javac`, `java`, JUnit, `javadoc`, `jar`, `git`

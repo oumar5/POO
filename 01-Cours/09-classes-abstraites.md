@@ -464,6 +464,7 @@ Fermer le code à l'extension : aucune sous-classe ne peut redéfinir `vote`, do
 ## 🔗 Pour pratiquer
 
 - 🏋️ [Exercices d'entraînement (avec corrigé)](../06-Exercices/09-classes-abstraites/enonce.md)
+- [TD Héritage — biens immobiliers et Pokémons (classes abstraites, interface)](../02-TD/TD-heritage/enonce.md)
 - [DS1 2025-2026 — sujet](../04-Examens/DS1-2025-2026/sujet.md)
 - [Checklist de révision](../05-Fiches/checklist-revision.md)
 

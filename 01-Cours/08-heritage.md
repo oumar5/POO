@@ -714,6 +714,7 @@ Chaque nouveau type de colis oblige à modifier `DeliveryTruck` (viole l'OCP) et
 ## 🔗 Pour pratiquer
 
 - 🏋️ [Exercices d'entraînement (avec corrigé)](../06-Exercices/08-heritage/enonce.md)
+- [TD Héritage — lookup, biens immobiliers, Pokémons (annales DS2)](../02-TD/TD-heritage/enonce.md)
 - [DS1 2025-2026 — sujet](../04-Examens/DS1-2025-2026/sujet.md)
 - [Checklist de révision](../05-Fiches/checklist-revision.md)
 
